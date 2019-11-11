@@ -10,7 +10,8 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
+import edu.wpi.first.wpilibj.GenericHID.Hand;
+import edu.wpi.first.wpilibj.Compressor; 
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the TimedRobot
@@ -33,6 +34,7 @@ public class Robot extends TimedRobot {
     m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
     m_chooser.addOption("My Auto", kCustomAuto);
     SmartDashboard.putData("Auto choices", m_chooser);
+    drive.initDrive();
   }
 
   /**
@@ -45,6 +47,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+
   }
 
   /**
@@ -86,6 +89,11 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
+    double xAxisDemand = drive.driveController.getX(Hand.kRight) * -.3; //get joystick values
+    double yAxisDemand = drive.driveController.getY(Hand.kLeft) * -1;
+    boolean turnStickButton = drive.driveController.getStickButton(Hand.kRight); //this is the button taht is pressed if you push down on the joysticks, or in this case the right joystick
+    boolean toggleY = drive.driveController.getYButton(); //gets raw y button value, toggle stuff is all done in the arcade drive function
+    drive.arcadeDrive(yAxisDemand, xAxisDemand, turnStickButton, toggleY);
   }
 
   /**
