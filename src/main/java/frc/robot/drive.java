@@ -23,7 +23,7 @@ public class drive {
     public static XboxController driveController;
     public static DoubleSolenoid rDriveShift, lDriveShift;
     public static int PCM_CAN_ID = 19;
-    public static boolean driveMechToggle;
+    public static boolean driveMechShiftToggle;
     public static void initDrive(){
         L1 = new CANSparkMax(10, MotorType.kBrushless);
         L2 = new CANSparkMax(11, MotorType.kBrushless);
@@ -34,8 +34,9 @@ public class drive {
         driveController = new XboxController(1);
         rDriveShift = new DoubleSolenoid(PCM_CAN_ID, 0, 7); //these values are subject to change if wiring changes
         lDriveShift = new DoubleSolenoid(PCM_CAN_ID, 1, 6); //^^
-        driveMechToggle = false;
+        driveMechShiftToggle = false;
     }
+
     public static void arcadeDrive(double forwardPower, double turnPower, boolean powerBoost, boolean mechanicalBoost){
         
         /*
@@ -49,9 +50,9 @@ public class drive {
             forwardPower = forwardPower *  0.5; //looky
         }
 
-        if(mechanicalBoost){driveMechToggle = !driveMechToggle;} //this toggles a boolean. that way, to switch to high speeds(mechanically) you just press the button once to switch the gear ratios
+        if(mechanicalBoost){driveMechShiftToggle = !driveMechShiftToggle;} //this toggles a boolean. that way, to switch to high speeds(mechanically) you just press the button once to switch the gear ratios
 
-        if(mechanicalBoost){  //shift gears to lower torque:higher RPM ratio
+        if(driveMechShiftToggle){  //shift gears to lower torque:higher RPM ratio
             rDriveShift.set(Value.kReverse); 
             lDriveShift.set(Value.kForward);
         } else {
