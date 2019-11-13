@@ -8,6 +8,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
@@ -24,6 +25,8 @@ public class Robot extends TimedRobot {
   private static final String kCustomAuto = "My Auto";
   private String m_autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
+
+  private XboxController driverController, mechController;
 
   /**
    * This function is run when the robot is first started up and should be
@@ -96,6 +99,32 @@ public class Robot extends TimedRobot {
     boolean turnStickButton = drive.driveController.getStickButtonPressed(Hand.kRight); //this is the button taht is pressed if you push down on the joysticks, or in this case the right joystick
     boolean toggleY = drive.driveController.getYButton(); //gets raw y button value, toggle stuff is all done in the arcade drive function
     drive.arcadeDrive(yAxisDemand, xAxisDemand, turnStickButton, toggleY);
+
+    if (driverController.getX(Hand.kRight) > 0) {
+      // Moves Right
+    } else if (driverController.getX(Hand.kRight) < 0) {
+      // Moves Left
+    } else if (driverController.getX(Hand.kRight) == 0) {
+      // Resets back to 0 
+    }
+
+    if (driverController.getY(Hand.kLeft) > 0) {
+      // Moves up
+    } else if (driverController.getY(Hand.kLeft) < 0) {
+      // Moves Down
+    } else if (driverController.getY(Hand.kLeft) == 0) {
+
+    }
+
+    if (driverController.getXButtonPressed()) {
+      /* hudsoncode.set(Value.kReverse) 
+        hudsoncode.set(Value.kForward) 
+           Turns Right or Left
+        hudsoncode.set(Value.kForward)
+        hudsoncode.set(Value.kReverse) 
+           Turns Right or Left  */
+
+    }
   }
 
   /**
