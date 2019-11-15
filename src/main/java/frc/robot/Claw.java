@@ -21,6 +21,7 @@ public class Claw {
     public static DoubleSolenoid LPiston, RPiston;
     public static CANSparkMax claw;
     public static TalonSRX clawIntakeMotor;
+    private static double scaler = 0.25;
     
     //This method should be run first and will initialize all important variables to make the claw work
     public static void initClaw() {
@@ -48,14 +49,10 @@ public class Claw {
         RPiston.set(Value.kOff);
     }
 
-    //Moves claw towards the forward position
-    public static void clawRotateForward() {
-        claw.set(.75);
-    }
-
-    //Moves claw towards the backward position
-    public static void clawRotateBackwards() {
-        claw.set(-.75);
+    //Controls Claw rotation
+    public static void clawRotation(double mechLeftTrigDemand, double mechRightTrigDemand) {
+        double clawArmDemand = (mechLeftTrigDemand - mechRightTrigDemand) * scaler;
+        claw.set(clawArmDemand);
     }
 
     //Activates the clawIntakeMotor to intake cargo
