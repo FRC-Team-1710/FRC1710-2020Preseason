@@ -25,8 +25,8 @@ public class Claw {
     
     //This method should be run first and will initialize all important variables to make the claw work
     public static void initClaw() {
-        LPiston = new DoubleSolenoid(1, 2); //Creates LPiston | PARAMETERS (forwardChannel, ReverseChannel)
-        RPiston = new DoubleSolenoid(3, 4); //Creates RPiston | same as above
+        LPiston = new DoubleSolenoid(0, 1); //Creates LPiston | PARAMETERS (forwardChannel, ReverseChannel)
+        RPiston = new DoubleSolenoid(2, 5); //Creates RPiston | same as above
         claw = new CANSparkMax(1, MotorType.kBrushless); //Creates claw | need to change the first int param to motor assignment ID
         clawIntakeMotor = new TalonSRX(2); //Creates clawIntakeMotor motor | need to change the int param to motor assingment ID
     }
