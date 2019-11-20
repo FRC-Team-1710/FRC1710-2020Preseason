@@ -1,5 +1,4 @@
 //motor id's 40-49
-//hi
 package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
