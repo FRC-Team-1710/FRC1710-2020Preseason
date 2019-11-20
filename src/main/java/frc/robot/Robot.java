@@ -114,7 +114,7 @@ public class Robot extends TimedRobot {
     } else if (driverController.getY(Hand.kLeft) < 0) {
       // Moves Down
     } else if (driverController.getY(Hand.kLeft) == 0) {
-
+      // Stops moving
     }
 
     if (driverController.getXButtonPressed()) {
